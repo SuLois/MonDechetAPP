@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.View;
 
 
-public class MainActivity extends AppCompatActivity implements SearchFragment.OnButtonClickedListener {
+public class MainActivity extends AppCompatActivity implements NavBarFragment.OnButtonClickedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
