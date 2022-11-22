@@ -13,6 +13,14 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        NavBarFragment navBarFragment = new NavBarFragment();
+        SearchFragment searchFragment = new SearchFragment();
+
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.navbar, navBarFragment)
+                .add(R.id.search, searchFragment)
+                .commit();
+
     }
 
     @Override
