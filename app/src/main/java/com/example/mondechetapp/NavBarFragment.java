@@ -12,13 +12,10 @@ import android.view.ViewGroup;
 
 public class NavBarFragment extends Fragment implements View.OnClickListener{
 
-    private OnButtonClickedListener searchCallback;
-    private OnButtonClickedListener scanCallback;
-    private OnButtonClickedListener astuceCallback;
-    private OnButtonClickedListener helpCallback;
+    private OnButtonClickedListener callback;
 
     public interface OnButtonClickedListener{
-        public void onButtonClicked(View view);
+        public void onButtonClicked(int button);
     }
 
     @Override
@@ -26,10 +23,34 @@ public class NavBarFragment extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View result = inflater.inflate(R.layout.fragment_navbar, container, false);
-        result.findViewById(R.id.search_button).setOnClickListener(this);
-        result.findViewById(R.id.scan_button).setOnClickListener(this);
-        result.findViewById(R.id.astuce_button).setOnClickListener(this);
-        result.findViewById(R.id.help_button).setOnClickListener(this);
+        result.findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = 1;
+                callback.onButtonClicked(position);
+            }
+        });
+        result.findViewById(R.id.scan_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = 2;
+                callback.onButtonClicked(position);
+            }
+        });
+        result.findViewById(R.id.astuce_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = 3;
+                callback.onButtonClicked(position);
+            }
+        });
+        result.findViewById(R.id.help_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = 4;
+                callback.onButtonClicked(position);
+            }
+        });
 
         return result;
     }
@@ -43,11 +64,8 @@ public class NavBarFragment extends Fragment implements View.OnClickListener{
 
     private void createCallbackToParentActivity() {
         try {
-            searchCallback = (OnButtonClickedListener) getActivity();
-            scanCallback = (OnButtonClickedListener) getActivity();
-            astuceCallback = (OnButtonClickedListener) getActivity();
-            helpCallback = (OnButtonClickedListener) getActivity();
-        }catch (ClassCastException e){
+            callback = (OnButtonClickedListener) getActivity();
+             }catch (ClassCastException e){
             throw new ClassCastException(e.toString()+ " must implement OnButtonClickedListener");
         }
     }
