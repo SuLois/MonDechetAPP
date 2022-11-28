@@ -12,23 +12,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cliquer sur un des boutons pour ouvrir la caméra"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCodeBarre"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonCodeBarre"
         android:layout_width="300dp"
         android:layout_height="200dp"
         android:text="Code barre"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/buttonDetection"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonDetection"
         android:layout_width="300dp"
         android:layout_height="200dp"
         android:layout_marginBottom="188dp"
