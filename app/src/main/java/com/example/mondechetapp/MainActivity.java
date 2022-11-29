@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.View;
 
 
-public class MainActivity extends AppCompatActivity implements NavBarFragment.OnButtonClickedListener {
+public class MainActivity extends AppCompatActivity implements NavBarFragment.OnButtonClickedListener, ScanFragment.OnButtonClickedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
         ScanFragment scanFragment = new ScanFragment();
         AstuceFragment astuceFragment = new AstuceFragment();
         HelpFragment helpFragment = new HelpFragment();
+        DetectionFragment detectionFragment = new DetectionFragment();
+        CodeBarreFragment codeBarreFragment = new CodeBarreFragment();
 
         if(button == 1){
             getSupportFragmentManager().beginTransaction()
@@ -56,7 +58,16 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
                     .replace(R.id.first_placeholder, helpFragment)
                     .commit();
         }
-
+        if(button == 5){
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.first_placeholder, codeBarreFragment)
+                    .commit();
+        }
+        if(button == 6){
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.first_placeholder, detectionFragment)
+                    .commit();
+        }
 
     }
 }

@@ -1,6 +1,7 @@
 package com.example.mondechetapp;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,25 +13,10 @@ import android.view.ViewGroup;
 
 public class ScanFragment extends Fragment implements View.OnClickListener {
 
-    private NavBarFragment.OnButtonClickedListener callback;
-
-    @Override
-    public void onClick(View view) {
-        Log.e(getClass().getSimpleName(),"Button clicked !");
-    }
+    private OnButtonClickedListener callback;
 
     public interface OnButtonClickedListener{
         public void onButtonClicked(int button);
-    }
-
-    public ScanFragment() {
-        // Required empty public constructor
-    }
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -40,18 +26,38 @@ public class ScanFragment extends Fragment implements View.OnClickListener {
         result.findViewById(R.id.buttonCodeBarre).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int position = 1;
+                int position = 5;
                 callback.onButtonClicked(position);
             }
         });
         result.findViewById(R.id.buttonDetection).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int position = 2;
+                int position = 6;
                 callback.onButtonClicked(position);
             }
 
         });
         return result;
     }
+
+    @Override public void onAttach(Context context){
+        super.onAttach(context);
+
+        this.createCallbackToParentActivity();
+    }
+
+    private void createCallbackToParentActivity(){
+            try {
+                callback = (OnButtonClickedListener) getActivity();
+            }catch (ClassCastException e){
+                throw new ClassCastException(e.toString()+ "must implement OnButtonClickedListener");
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        Log.e(getClass().getSimpleName(),"Button clicked !");
+    }
+
 }
