@@ -4,14 +4,10 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-
-import android.app.Activity;
-import android.app.assist.AssistStructure;
-import android.content.Intent;
+import android.app.Fragment;
 import android.os.Bundle;
-import android.text.TextPaint;
 import android.util.Log;
-import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.journeyapps.barcodescanner.ScanContract;
@@ -20,14 +16,21 @@ import com.journeyapps.barcodescanner.ScanOptions;
 
 public class MainActivity extends AppCompatActivity implements NavBarFragment.OnButtonClickedListener, ScanFragment.OnButtonClickedListener {
 
+    CodeBarreFragment codeBarreFragment = new CodeBarreFragment();
+    SearchFragment searchFragment = new SearchFragment();
+    ScanFragment scanFragment = new ScanFragment();
+    AstuceFragment astuceFragment = new AstuceFragment();
+    HelpFragment helpFragment = new HelpFragment();
+    DetectionFragment detectionFragment = new DetectionFragment();
+    NavBarFragment navBarFragment = new NavBarFragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         NavBarFragment navBarFragment = new NavBarFragment();
-        SearchFragment searchFragment = new SearchFragment();
-        ScanOptions options = new ScanOptions();
+
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.second_placeholder, navBarFragment)
@@ -42,6 +45,11 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
                     Toast.makeText(MainActivity.this, "Cancelled", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(MainActivity.this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                    String valueCB = result.getContents();
+
+                    CodeBarreFragment frag = (CodeBarreFragment) getSupportFragmentManager()
+                            .findFragmentById(R.id.fragment_code_barre);
+                    codeBarreFragment.changeText(valueCB);
                 }
             });
 
@@ -54,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
         AstuceFragment astuceFragment = new AstuceFragment();
         HelpFragment helpFragment = new HelpFragment();
         DetectionFragment detectionFragment = new DetectionFragment();
-        CodeBarreFragment codeBarreFragment = new CodeBarreFragment();
 
 
         if(button == 1){
@@ -84,7 +91,12 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.first_placeholder, codeBarreFragment)
                     .commit();
-            barcodeLauncher.launch(new ScanOptions());
+
+            ScanOptions options = new ScanOptions();
+            options.setTimeout(10000);
+            options.setBeepEnabled(false);
+            barcodeLauncher.launch(options);
+
         }
         if(button == 6){
             getSupportFragmentManager().beginTransaction()
