@@ -5,44 +5,56 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Random;
 
-public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
+public class RVAdapter extends RecyclerView.Adapter<RVAdapter.RecyclerViewHolder> {
 
     //ViewHolder Class in RVAdapter Class
-    public class ItemViewHolder extends RecyclerView.ViewHolder {
-        TextView txt;
+    public class RecyclerViewHolder extends RecyclerView.ViewHolder {
+        private TextView view;
         //ImageView image;
 
-        public ItemViewHolder(View itemView) {
+        public RecyclerViewHolder(View itemView) {
             super(itemView);
-            txt = (TextView) itemView.findViewById(R.id.rv_item); //rv_item from fragment_search_rv_item
+            view = itemView.findViewById(R.id.randomText); //rv_item from fragment_search_rv_item
             //image = (ImageView) itemView.findViewById(R.id.image);
+        }
+        public TextView getView(){
+            return view;
         }
     }
 
 
-    //Start Adapter class
-    List<String> dataList;
-    public RVAdapter(List<String> dataList) {
-        this.dataList = dataList;
+    private Random random;
+
+    public RVAdapter(int seed) {
+        this.random = new Random(seed);
     }
 
     @Override
-    public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_search_rv_item, parent, false);
-        return new ItemViewHolder(view);
+    public int getItemViewType(final int position) {
+        return R.layout.fragment_search_rv_item;
+    }
+
+    @NonNull
+    @Override
+    public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
+        return new RecyclerViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ItemViewHolder holder, int position) {
-        holder.txt.setText(dataList.get(position));
+    public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
+        holder.getView().setText(String.valueOf(random.nextInt()));
     }
 
     @Override
     public int getItemCount() {
-        return dataList.size();
+        return 100;
     }
 }
