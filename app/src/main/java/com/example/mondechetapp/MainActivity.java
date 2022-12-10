@@ -2,22 +2,31 @@ package com.example.mondechetapp;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.mondechetapp.BDD.Dechet;
 import com.example.mondechetapp.Scan.CodeBarreFragment;
 import com.example.mondechetapp.Scan.DetectionFragment;
 import com.example.mondechetapp.Scan.ScanFragment;
 import com.example.mondechetapp.Search.SearchFragment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
@@ -36,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
     NavBarFragment navBarFragment = new NavBarFragment();
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference dechetsRef = db.collection("Listes_Dechets");
     private DocumentReference dechetRef = db.document("Liste_Dechets/CB_Dechet");
     Map<String, Object> dechet = new HashMap<>();
 
@@ -56,6 +66,32 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
                 .add(R.id.first_placeholder, searchFragment)
                 .commit();
     }
+
+    //onStart et onStop importante dans le cycle de vie de l'activity, onStop est simplifié par le 'this'
+    protected void onStart() {
+        super.onStart();
+/*
+        dechetsRef.addSnapshotListener(this, new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(QuerySnapshot queryDocumentSnapshots, FirebaseFirestoreException error) {
+                if(error != null){
+                    return;
+                }
+                //String data = "";
+                for(QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                    Dechet dechet = documentSnapshot.toObject(Dechet.class);
+
+                    String CB = dechet.getCode_barre();
+                    String name = dechet.getName();
+                    String bac = dechet.getBac();
+
+                    //data += "Code Barre :" + CB + "\nName :" + name + "\nBac :" + bac "\n\n";
+                    display(CB, name, bac);
+                }
+            }
+        });*/
+    }
+
 
     private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(),
             result -> {
@@ -128,30 +164,24 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
 
     }
 
-
     public void find(String CB) {
-        dechetRef.get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        dechetsRef.get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()) {
-                            String numCB = documentSnapshot.getString(KEY_CODEBARRE);
-                            String name = documentSnapshot.getString(KEY_NAME);
-                            String bac = documentSnapshot.getString(KEY_BAC);
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        //String data = ""; possibilité d'utiliser data pour concatener une chaine de carac et ensuite faire une seule textview défilante (plusieurs entrées)
 
-                            //Map<String, Object> dechet = documentSnapshot.getData();
-                            display(numCB, name, bac);
-                        } else {
-                            Toast.makeText(MainActivity.this, "Le déchet n'existe pas encore !", Toast.LENGTH_SHORT).show();
+                        for(QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                            Dechet dechet = documentSnapshot.toObject(Dechet.class);
+
+                            String CB = dechet.getCode_barre();
+                            String name = dechet.getName();
+                            String bac = dechet.getBac();
+                            display(CB, name, bac);
                         }
+
                     }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(MainActivity.this, "Erreur !", Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, e.toString());
-                    }
+
                 });
     }
 }
