@@ -2,6 +2,8 @@ package com.example.mondechetapp;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 import android.app.Fragment;
@@ -14,6 +16,8 @@ import com.example.mondechetapp.BDD.Dechets;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity implements NavBarFragment.OnButtonClickedListener, ScanFragment.OnButtonClickedListener {
@@ -39,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
                 .replace(R.id.second_placeholder, navBarFragment)
                 .add(R.id.first_placeholder, searchFragment)
                 .commit();
-
     }
 
     private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(),
