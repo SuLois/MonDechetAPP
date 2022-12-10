@@ -1,4 +1,4 @@
-package com.example.mondechetapp;
+package com.example.mondechetapp.Scan;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.mondechetapp.R;
 import com.google.zxing.client.android.Intents;
 
 public class ScanFragment extends Fragment implements View.OnClickListener {

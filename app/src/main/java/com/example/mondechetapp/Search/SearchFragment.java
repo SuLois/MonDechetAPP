@@ -1,4 +1,4 @@
-package com.example.mondechetapp;
+package com.example.mondechetapp.Search;
 
 import android.os.Bundle;
 
@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.mondechetapp.R;
 
 
 public class SearchFragment extends Fragment {

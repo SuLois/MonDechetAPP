@@ -1,4 +1,4 @@
-package com.example.mondechetapp;
+package com.example.mondechetapp.Scan;
 
 import android.os.Bundle;
 
@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.mondechetapp.R;
 
 public class CodeBarreFragment extends Fragment {
 
@@ -59,8 +61,12 @@ public class CodeBarreFragment extends Fragment {
         return result;
     }
 
-    public void changeText(String newText) {
-        TextView textview = (TextView) getView().findViewById(R.id.textCB);
-        textview.setText(newText);
+    public void changeText(String newCB, String newName, String newBac) {
+        TextView textviewCB = (TextView) getView().findViewById(R.id.textCB);
+        textviewCB.setText(newCB);
+        TextView textviewName = (TextView) getView().findViewById(R.id.textName);
+        textviewName.setText(newName);
+        TextView textviewBac = (TextView) getView().findViewById(R.id.textBac);
+        textviewBac.setText(newBac);
     }
 }

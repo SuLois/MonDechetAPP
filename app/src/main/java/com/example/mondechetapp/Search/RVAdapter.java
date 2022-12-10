@@ -1,4 +1,4 @@
-package com.example.mondechetapp;
+package com.example.mondechetapp.Search;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
+import com.example.mondechetapp.R;
+
 import java.util.Random;
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.RecyclerViewHolder> {
