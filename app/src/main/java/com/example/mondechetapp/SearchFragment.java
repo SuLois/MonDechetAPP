@@ -12,19 +12,14 @@ import android.view.ViewGroup;
 public class SearchFragment extends Fragment {
 
 
-    public SearchFragment() {
-        // Required empty public constructor
-    }
-
+    // Add RecyclerView member
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState
+    ) {
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         return view;

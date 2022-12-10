@@ -2,6 +2,7 @@ package com.example.mondechetapp;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import com.google.zxing.client.android.Intents;
 
 public class ScanFragment extends Fragment implements View.OnClickListener {
 
@@ -23,6 +27,7 @@ public class ScanFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View result = inflater.inflate(R.layout.fragment_scan, container, false);
+
         result.findViewById(R.id.buttonCodeBarre).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

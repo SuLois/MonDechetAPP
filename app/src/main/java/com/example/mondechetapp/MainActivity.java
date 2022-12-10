@@ -10,6 +10,8 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mondechetapp.BDD.Dechets;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
@@ -24,11 +26,12 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
     DetectionFragment detectionFragment = new DetectionFragment();
     NavBarFragment navBarFragment = new NavBarFragment();
 
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         NavBarFragment navBarFragment = new NavBarFragment();
 
 
@@ -46,12 +49,17 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
                 } else {
                     Toast.makeText(MainActivity.this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
                     String valueCB = result.getContents();
+                    analyseCB(valueCB);
 
-                    CodeBarreFragment frag = (CodeBarreFragment) getSupportFragmentManager()
-                            .findFragmentById(R.id.fragment_code_barre);
-                    codeBarreFragment.changeText(valueCB);
+                    // TODO : Mettre en place la fiche du dechet à partir d'ici ou bien appel fonction (meilleure solution)
                 }
             });
+
+    public void analyseCB(String CB){
+        CodeBarreFragment frag = (CodeBarreFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.fragment_code_barre);
+        codeBarreFragment.changeText(CB);
+    }
 
 
     @Override
