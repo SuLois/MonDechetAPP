@@ -4,6 +4,8 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 
 import android.os.Bundle;
@@ -184,6 +186,17 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
 
                 });
     }
+
+    //redirect the searchfrgament by codeBarreFragment
+    public void replaceFragments() {
+        Fragment fragment = null;
+
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.first_placeholder, codeBarreFragment)
+                .commit();
+    }
+
 }
 
 
