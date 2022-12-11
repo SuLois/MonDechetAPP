@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_code_barre"
+    android:theme="@style/myfragmentstyle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Scan.CodeBarreFragment">
+
+    <TextView
+        android:id="@+id/titleTxtCB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Le code barre de ce déchet est :"
+        android:theme="@style/mytitlestyle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.12"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textCB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_blank_fragment"
-        android:textSize="30dp"
+        android:theme="@style/mytextviewstylecb"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,11 +36,23 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
+        android:id="@+id/titleTxtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vous avez scanné :"
+        android:theme="@style/mytitlestyle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.32"
+        tools:ignore="MissingConstraints" />
+    <TextView
         android:id="@+id/textName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_blank_fragment"
-        android:textSize="30dp"
+        android:theme="@style/mytextviewstylecb"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,16 +61,40 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
+        android:id="@+id/titleTxtBac"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ce déchet est à jeter dans :"
+        android:theme="@style/mytitlestyle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.52"
+        tools:ignore="MissingConstraints" />
+    <TextView
         android:id="@+id/textBac"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_blank_fragment"
-        android:textSize="30dp"
+        android:theme="@style/mytextviewstylecb"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.55"
         tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        app:layout_constraintVertical_bias="0.90"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="VectorDrawableCompat"
+        android:src="@drawable/ic_launcher_foreground"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

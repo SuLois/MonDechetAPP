@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_500">#BFA8BB</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
@@ -10,15 +10,27 @@
 
     <style name="mybuttonstyle" parent="@android:style/Widget.Button">
         <item name="android:gravity">center_vertical|center_horizontal</item>
-        <item name="android:textColor">#202020</item>
-        <item name="android:backgroundTint">#E7EE9D</item>
-        <item name="android:shadowColor">#FF000000</item>
-        <item name="android:shadowDx">0</item>
-        <item name="android:shadowDy">-3</item>
-        <item name="android:shadowRadius">0.2</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:backgroundTint">#D5F591</item>
     </style>
 
     <style name="myfragmentstyle" parent="@android:style/Theme.Holo">
-        <item name="android:background">#469FED</item>
+        <item name="android:background">#8CDBA9</item>
+    </style>
+
+    <style name="myiconestyke" parent="@android:style/Theme.Holo">
+        <item name="android:background">#000000</item>
+    </style>
+
+    <style name="mytextviewstylecb" parent="@android:style/Theme.Holo">
+        <item name="android:fontFamily">"serif-monospace"</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="mytitlestyle" parent="@android:style/Theme.Holo">
+        <item name="android:fontFamily">"serif-monospace"</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">17dp</item>
     </style>
 </resources>

@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
     }
 
     //onStart et onStop importante dans le cycle de vie de l'activity, onStop est simplifié par le 'this'
-    protected void onStart() {
+    /*protected void onStart() {
         super.onStart();
         dechetsRef.addSnapshotListener(this, new EventListener<QuerySnapshot>() {
             @Override
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
                 }
             }
         });
-    }
+    }*/
 
 
     private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(),
@@ -100,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
                     Toast.makeText(MainActivity.this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
                     String valueCB = result.getContents();
                     find(valueCB);
-                    // TODO : Mettre en place la fiche du dechet à partir d'ici ou bien appel fonction (meilleure solution)
                 }
             });
 
