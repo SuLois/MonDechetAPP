@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
     //onStart et onStop importante dans le cycle de vie de l'activity, onStop est simplifié par le 'this'
     protected void onStart() {
         super.onStart();
-/*
         dechetsRef.addSnapshotListener(this, new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(QuerySnapshot queryDocumentSnapshots, FirebaseFirestoreException error) {
@@ -86,10 +85,10 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
                     String bac = dechet.getBac();
 
                     //data += "Code Barre :" + CB + "\nName :" + name + "\nBac :" + bac "\n\n";
-                    display(CB, name, bac);
+                    //display(CB, name, bac);
                 }
             }
-        });*/
+        });
     }
 
 
@@ -165,7 +164,8 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
     }
 
     public void find(String CB) {
-        dechetsRef.get()
+        dechetsRef.whereEqualTo("code_barre", CB)
+                .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
