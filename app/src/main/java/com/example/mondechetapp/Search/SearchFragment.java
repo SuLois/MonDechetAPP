@@ -39,9 +39,6 @@ public class SearchFragment extends Fragment implements OnItemListener {
     FirebaseFirestore db;
 
     @Override
-    public void onItemRetrieve(DocumentSnapshot documentSnapshot, int position) {}
-
-    @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {

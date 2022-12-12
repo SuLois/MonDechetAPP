@@ -36,9 +36,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.RecyclerViewHolder
 
     @Override
     public void onItemClick(int position) {}
-    @Override
-    public void onItemRetrieve(DocumentSnapshot documentSnapshot, int position) {}
-
 
     @Override
     public int getItemViewType(final int position) {
@@ -94,10 +91,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.RecyclerViewHolder
                             onItemListener.onItemClick(pos);
                         }
                     }
-                    /*int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION && listener != null){
-                        listener.onItemRetrieve(getSnapshots().getSnapshot(position), position);
-                    }*/
                 }
             });
             //image = (ImageView) itemView.findViewById(R.id.image);
