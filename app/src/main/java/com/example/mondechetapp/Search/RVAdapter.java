@@ -3,12 +3,17 @@ package com.example.mondechetapp.Search;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.mondechetapp.R;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 
 import java.util.ArrayList;
 
@@ -16,6 +21,12 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.RecyclerViewHolder
 
     private final OnItemListener onItemListener;
     ArrayList<RVItem> rvItemArrayList;
+    String itemName;
+    private OnItemListener listener;
+    FirebaseFirestore db;
+    String name;
+
+
 
     public RVAdapter(ArrayList<RVItem> rvItemArrayList,
                      OnItemListener onItemListener) {
@@ -24,9 +35,9 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.RecyclerViewHolder
     }
 
     @Override
-    public void onItemClick(int position) {
-
-    }
+    public void onItemClick(int position) {}
+    @Override
+    public void onItemRetrieve(DocumentSnapshot documentSnapshot, int position) {}
 
 
     @Override
@@ -45,7 +56,16 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.RecyclerViewHolder
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         RVItem item = rvItemArrayList.get(position);
+        itemName = item.name;
         holder.getView().setText(item.name);
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -56,7 +76,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.RecyclerViewHolder
 
 
     //ViewHolder Class in RVAdapter Class and OnItemListener interface in ViewHolder Class
-    public static class RecyclerViewHolder extends RecyclerView.ViewHolder {
+    public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         private TextView view;
         //ImageView image;
 
@@ -73,8 +93,11 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.RecyclerViewHolder
                         if (pos != RecyclerView.NO_POSITION){
                             onItemListener.onItemClick(pos);
                         }
-
                     }
+                    /*int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && listener != null){
+                        listener.onItemRetrieve(getSnapshots().getSnapshot(position), position);
+                    }*/
                 }
             });
             //image = (ImageView) itemView.findViewById(R.id.image);
@@ -82,8 +105,9 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.RecyclerViewHolder
         public TextView getView(){
             return view;
         }
-
     }
-
+    public void SetOnItemListener(OnItemListener listener){
+        this.listener = listener;
+    }
 
 }

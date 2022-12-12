@@ -17,6 +17,7 @@ import com.example.mondechetapp.BDD.Dechet;
 import com.example.mondechetapp.Scan.CodeBarreFragment;
 import com.example.mondechetapp.Scan.DetectionFragment;
 import com.example.mondechetapp.Scan.ScanFragment;
+import com.example.mondechetapp.Search.RVAdapter;
 import com.example.mondechetapp.Search.SearchFragment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
     private static final String KEY_CODEBARRE = "code barre";
     private static final String KEY_NAME = "name";
     private static final String KEY_BAC = "bac";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,6 +182,30 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
                             String name = dechet.getName();
                             String bac = dechet.getBac();
                             display(CB, name, bac);
+                        }
+
+                    }
+
+                });
+    }
+
+    public void findFromName(String Fname) {
+        dechetsRef.whereEqualTo("name", Fname)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        //String data = ""; possibilité d'utiliser data pour concatener une chaine de carac et ensuite faire une seule textview défilante (plusieurs entrées)
+
+                        for(QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                            Dechet dechet = documentSnapshot.toObject(Dechet.class);
+
+                            String CB = dechet.getCode_barre();
+                            String name = dechet.getName();
+                            String bac = dechet.getBac();
+                            display(CB, name, bac);
+
+                            codeBarreFragment.changeText(CB, name, bac);
                         }
 
                     }

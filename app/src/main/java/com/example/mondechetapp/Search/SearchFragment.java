@@ -11,15 +11,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.mondechetapp.BDD.Dechet;
 import com.example.mondechetapp.MainActivity;
 import com.example.mondechetapp.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -32,8 +37,9 @@ public class SearchFragment extends Fragment implements OnItemListener {
     ArrayList<RVItem> rvItemArrayList;
     RVAdapter rvAdapter;
     FirebaseFirestore db;
-    CollectionReference dechetRef;
 
+    @Override
+    public void onItemRetrieve(DocumentSnapshot documentSnapshot, int position) {}
 
     @Override
     public View onCreateView(
@@ -81,8 +87,19 @@ public class SearchFragment extends Fragment implements OnItemListener {
     }
 
 
+    MainActivity mainActivity;
+    //mainActivity = new MainActivity(db) {}
+
+
     @Override
     public void onItemClick(int position) {
         ((MainActivity) getActivity()).replaceFragments();
+
+        String itemName = rvAdapter.getItemName();
+
+        ((MainActivity) getActivity()).findFromName(itemName);
+        //Toast.makeText(getActivity(), itemName, Toast.LENGTH_LONG).show();
     }
+
+
 }
