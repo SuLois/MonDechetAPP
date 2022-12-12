@@ -12,11 +12,12 @@
         <item name="android:gravity">center_vertical|center_horizontal</item>
         <item name="android:textColor">#000000</item>
         <item name="android:backgroundTint">#D5F591</item>
+        <item name="android:fontFamily">sans-serif</item>
     </style>
 
     <style name="mynavbarstyle" parent="@android:style/Widget.Button">
         <item name="android:backgroundTint">#33AB5F</item>
-        <item name="android:fontFamily">"serif-monospace"</item>
+        <item name="android:fontFamily">"sans-serif-medium"</item>
         <item name="android:textSize">15dp</item>
     </style>
 
@@ -29,13 +30,13 @@
     </style>
 
     <style name="mytextviewstylecb" parent="@android:style/Theme.Holo">
-        <item name="android:fontFamily">"serif-monospace"</item>
+        <item name="android:fontFamily">"sans-serif-medium"</item>
         <item name="android:textColor">#000000</item>
         <item name="android:textSize">20dp</item>
     </style>
 
     <style name="mytitlestyle" parent="@android:style/Theme.Holo">
-        <item name="android:fontFamily">"serif-monospace"</item>
+        <item name="android:fontFamily">"sans-serif"</item>
         <item name="android:textColor">#000000</item>
         <item name="android:textSize">17dp</item>
     </style>

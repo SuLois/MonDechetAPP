@@ -58,8 +58,6 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        NavBarFragment navBarFragment = new NavBarFragment();
-
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.second_placeholder, navBarFragment)
@@ -91,11 +89,11 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
         });
     }*/
 
-
     private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(),
             result -> {
                 if (result.getContents() == null) {
                     Toast.makeText(MainActivity.this, "Cancelled", Toast.LENGTH_LONG).show();
+
                 } else {
                     Toast.makeText(MainActivity.this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
                     String valueCB = result.getContents();
@@ -113,12 +111,6 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
     @Override
     public void onButtonClicked(int button) {
         Log.e(getClass().getSimpleName(), "Button " + Integer.toString(button) + " clicked !");
-        SearchFragment searchFragment = new SearchFragment();
-        ScanFragment scanFragment = new ScanFragment();
-        AstuceFragment astuceFragment = new AstuceFragment();
-        HelpFragment helpFragment = new HelpFragment();
-        DetectionFragment detectionFragment = new DetectionFragment();
-
 
         if (button == 1) {
             getSupportFragmentManager().beginTransaction()
@@ -152,7 +144,6 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
             options.setTimeout(10000);
             options.setBeepEnabled(false);
             barcodeLauncher.launch(options);
-
         }
         if (button == 6) {
             getSupportFragmentManager().beginTransaction()
