@@ -10,16 +10,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mondechetapp.R;
 
-import java.util.Random;
+import java.util.ArrayList;
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.RecyclerViewHolder> implements OnItemListener {
 
     private final OnItemListener onItemListener;
-    private Random random;
+    ArrayList<RVItem> rvItemArrayList;
 
-    public RVAdapter(int seed,
+    public RVAdapter(ArrayList<RVItem> rvItemArrayList,
                      OnItemListener onItemListener) {
-        this.random = new Random(seed);
+        this.rvItemArrayList = rvItemArrayList;
         this.onItemListener = onItemListener;
     }
 
@@ -44,12 +44,13 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.RecyclerViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
-        holder.getView().setText(String.valueOf(random.nextInt()));
+        RVItem item = rvItemArrayList.get(position);
+        holder.getView().setText(item.name);
     }
 
     @Override
     public int getItemCount() {
-        return 100;
+        return rvItemArrayList.size();
     }
 
 
@@ -61,7 +62,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.RecyclerViewHolder
 
         public RecyclerViewHolder(View itemView, OnItemListener onItemListener) {
             super(itemView);
-            view = itemView.findViewById(R.id.randomText); //rv_item from fragment_search_rv_item
+            view = itemView.findViewById(R.id.itemText); //rv_item from fragment_search_rv_item
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
