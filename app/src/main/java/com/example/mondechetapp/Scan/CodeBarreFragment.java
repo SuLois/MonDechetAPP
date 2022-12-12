@@ -34,6 +34,7 @@ public class CodeBarreFragment extends Fragment {
         String Recyclage = "Recyclage";
         String Verre = "Verre";
         String DechetMetal = "Déchetterie métal";
+        String Ordure = "Ordure ménagère";
         ImageView imageView = (ImageView) getView().findViewById(R.id.imageView);
         if(newBac.equals(Recyclage)){
             imageView.setImageResource(R.drawable.poubelle__jaune);
@@ -43,6 +44,9 @@ public class CodeBarreFragment extends Fragment {
         }
         if(newBac.equals(DechetMetal)){
             imageView.setImageResource(R.drawable.metal);
+        }
+        if(newBac.equals(Ordure)){
+            imageView.setImageResource(R.drawable.poubelle__jaune);
         }
     }
 }
