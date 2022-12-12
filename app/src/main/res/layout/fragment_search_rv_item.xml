@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp"
+    android:padding="15dp"
+    android:background="#4CAF50">
+
 
     <TextView
-        android:id="@+id/randomText"
+        android:id="@+id/itemText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="This is some temp text" />
+        tools:text="This is some temp text"
+        android:textSize="18dp"
+        android:textStyle="bold"/>
 
 </FrameLayout>
+

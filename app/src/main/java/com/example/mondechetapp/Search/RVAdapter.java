@@ -3,38 +3,39 @@ package com.example.mondechetapp.Search;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.mondechetapp.R;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Random;
 
-public class RVAdapter extends RecyclerView.Adapter<RVAdapter.RecyclerViewHolder> {
+import java.util.ArrayList;
 
-    //ViewHolder Class in RVAdapter Class
-    public class RecyclerViewHolder extends RecyclerView.ViewHolder {
-        private TextView view;
-        //ImageView image;
+public class RVAdapter extends RecyclerView.Adapter<RVAdapter.RecyclerViewHolder> implements OnItemListener {
 
-        public RecyclerViewHolder(View itemView) {
-            super(itemView);
-            view = itemView.findViewById(R.id.randomText); //rv_item from fragment_search_rv_item
-            //image = (ImageView) itemView.findViewById(R.id.image);
-        }
-        public TextView getView(){
-            return view;
-        }
+    private final OnItemListener onItemListener;
+    ArrayList<RVItem> rvItemArrayList;
+    String itemName;
+    private OnItemListener listener;
+    FirebaseFirestore db;
+    String name;
+
+
+
+    public RVAdapter(ArrayList<RVItem> rvItemArrayList,
+                     OnItemListener onItemListener) {
+        this.rvItemArrayList = rvItemArrayList;
+        this.onItemListener = onItemListener;
     }
 
-
-    private Random random;
-
-    public RVAdapter(int seed) {
-        this.random = new Random(seed);
-    }
+    @Override
+    public void onItemClick(int position) {}
 
     @Override
     public int getItemViewType(final int position) {
@@ -46,16 +47,60 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.RecyclerViewHolder
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
-        return new RecyclerViewHolder(view);
+        return new RecyclerViewHolder(view, onItemListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
-        holder.getView().setText(String.valueOf(random.nextInt()));
+        RVItem item = rvItemArrayList.get(position);
+        itemName = item.name;
+        holder.getView().setText(item.name);
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
     public int getItemCount() {
-        return 100;
+        return rvItemArrayList.size();
     }
+
+
+
+    //ViewHolder Class in RVAdapter Class and OnItemListener interface in ViewHolder Class
+    public class RecyclerViewHolder extends RecyclerView.ViewHolder {
+        private TextView view;
+        //ImageView image;
+
+        public RecyclerViewHolder(View itemView, OnItemListener onItemListener) {
+            super(itemView);
+            view = itemView.findViewById(R.id.itemText); //rv_item from fragment_search_rv_item
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (onItemListener != null){
+                        int pos = getAdapterPosition();
+
+                        if (pos != RecyclerView.NO_POSITION){
+                            onItemListener.onItemClick(pos);
+                        }
+                    }
+                }
+            });
+            //image = (ImageView) itemView.findViewById(R.id.image);
+        }
+        public TextView getView(){
+            return view;
+        }
+    }
+    public void SetOnItemListener(OnItemListener listener){
+        this.listener = listener;
+    }
+
 }
