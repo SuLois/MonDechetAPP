@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- Pour tous nos layout, nous avons fait appel à des styles qui sont trouvables dans le fichier "colors",
+qui se situe dans le répértoire "res>values" -->
+
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"

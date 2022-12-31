@@ -23,6 +23,7 @@ public class CodeBarreFragment extends Fragment {
         return result;
     }
 
+    // Gestion de l'affichage sur la fiche Dechet
     public void changeText(String newCB, String newName, String newBac) {
         TextView textviewCB = (TextView) getView().findViewById(R.id.textCB);
         textviewCB.setText(newCB);
@@ -31,6 +32,7 @@ public class CodeBarreFragment extends Fragment {
         TextView textviewBac = (TextView) getView().findViewById(R.id.textBac);
         textviewBac.setText(newBac);
 
+        //Affichage de l'image en relation avec le bac de tri, qui se trouvent dans le drawables
         String Recyclage = "Recyclage";
         String Verre = "Verre";
         String DechetMetal = "Déchetterie métal";

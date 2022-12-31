@@ -39,6 +39,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements NavBarFragment.OnButtonClickedListener, ScanFragment.OnButtonClickedListener {
 
+    //Création des instances de fragments
     CodeBarreFragment codeBarreFragment = new CodeBarreFragment();
     SearchFragment searchFragment = new SearchFragment();
     ScanFragment scanFragment = new ScanFragment();
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
     DetectionFragment detectionFragment = new DetectionFragment();
     NavBarFragment navBarFragment = new NavBarFragment();
 
+    //Initialisation de la base de données Firebase
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference dechetsRef = db.collection("Listes_Dechets");
     private DocumentReference dechetRef = db.document("Liste_Dechets/CB_Dechet");
@@ -63,36 +65,14 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Placement du premier fragement dans la zone haute de l'écran (1) et de la NavBar dans la zone basse (2)
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.second_placeholder, navBarFragment)
                 .add(R.id.first_placeholder, searchFragment)
                 .commit();
     }
 
-    //onStart et onStop importante dans le cycle de vie de l'activity, onStop est simplifié par le 'this'
-    /*protected void onStart() {
-        super.onStart();
-        dechetsRef.addSnapshotListener(this, new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(QuerySnapshot queryDocumentSnapshots, FirebaseFirestoreException error) {
-                if(error != null){
-                    return;
-                }
-                //String data = "";
-                for(QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
-                    Dechet dechet = documentSnapshot.toObject(Dechet.class);
-
-                    String CB = dechet.getCode_barre();
-                    String name = dechet.getName();
-                    String bac = dechet.getBac();
-
-                    //data += "Code Barre :" + CB + "\nName :" + name + "\nBac :" + bac "\n\n";
-                    //display(CB, name, bac);
-                }
-            }
-        });
-    }*/
-
+    //Fonction Scan du code barre, appel à la librairie ZXing
     private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(),
             result -> {
                 if (result.getContents() == null) {
@@ -105,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
                 }
             });
 
+    //Affichage des retounées par la base de données dans le fragment code_barre (correspond à la fiche dechet)
     public void display(String CB, String name, String bac) {
         CodeBarreFragment frag = (CodeBarreFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_code_barre);
@@ -112,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
     }
 
 
+    // Gestion des actions de l'utilisateur sur les boutons
     @Override
     public void onButtonClicked(int button) {
         Log.e(getClass().getSimpleName(), "Button " + Integer.toString(button) + " clicked !");
@@ -157,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
 
     }
 
+    //Interrogation de la base de données
     public void find(String CB) {
         dechetsRef.whereEqualTo("code_barre", CB)
                 .get()
@@ -216,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
 }
 
 
-    /* Ecriture dans Firebase
+    /* Ecriture dans Firebase, nous interresse pour la suite du développement
     public void save(){
         Map<String, Object> dechet = new HashMap<>();
         dechet.put(KEY_CODEBARRE, "123456789");
@@ -240,3 +223,29 @@ public class MainActivity extends AppCompatActivity implements NavBarFragment.On
 
     }
 */
+
+// onStart permet de faire des actions automatique au lancement de l'activité
+
+//onStart et onStop importante dans le cycle de vie de l'activity, onStop est simplifié par le 'this'
+    /*protected void onStart() {
+        super.onStart();
+        dechetsRef.addSnapshotListener(this, new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(QuerySnapshot queryDocumentSnapshots, FirebaseFirestoreException error) {
+                if(error != null){
+                    return;
+                }
+                //String data = "";
+                for(QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                    Dechet dechet = documentSnapshot.toObject(Dechet.class);
+
+                    String CB = dechet.getCode_barre();
+                    String name = dechet.getName();
+                    String bac = dechet.getBac();
+
+                    //data += "Code Barre :" + CB + "\nName :" + name + "\nBac :" + bac "\n\n";
+                    //display(CB, name, bac);
+                }
+            }
+        });
+    }*/

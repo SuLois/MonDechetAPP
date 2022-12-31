@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+//Ce fichier permet de gérer le fragment NavBar
 public class NavBarFragment extends Fragment implements View.OnClickListener{
 
     private OnButtonClickedListener callback;
@@ -28,6 +29,7 @@ public class NavBarFragment extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View result = inflater.inflate(R.layout.fragment_navbar, container, false);
+        //Récupération de la position du bouton cliqué
         result.findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,6 +62,7 @@ public class NavBarFragment extends Fragment implements View.OnClickListener{
         return result;
     }
 
+    //Liaison avec la MainActivity
     @Override
     public void onAttach(Context context){
         super.onAttach(context);
@@ -75,6 +78,7 @@ public class NavBarFragment extends Fragment implements View.OnClickListener{
         }
     }
 
+    //Message en log
     @Override
     public void onClick(View v){
         Log.e(getClass().getSimpleName(),"Button clicked !");

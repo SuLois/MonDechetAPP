@@ -29,6 +29,7 @@ public class ScanFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View result = inflater.inflate(R.layout.fragment_scan, container, false);
 
+        //Réccupération de la position du bouton cliqué
         result.findViewById(R.id.buttonCodeBarre).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,6 +48,7 @@ public class ScanFragment extends Fragment implements View.OnClickListener {
         return result;
     }
 
+    //Liaison avec la MainActivity
     @Override public void onAttach(Context context){
         super.onAttach(context);
 
@@ -61,6 +63,7 @@ public class ScanFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    //Message en log
     @Override
     public void onClick(View view) {
         Log.e(getClass().getSimpleName(),"Button clicked !");
